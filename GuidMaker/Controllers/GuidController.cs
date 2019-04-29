@@ -12,7 +12,8 @@ namespace GuidMaker.Controllers
     [Route("api/[controller]")]
     public class GuidController : Controller
     {
-        public readonly string _machineName;
+        private static bool _fail;
+        private readonly string _machineName;
 
         public GuidController()
         {
@@ -21,13 +22,26 @@ namespace GuidMaker.Controllers
 
         // GET: api/values
         [HttpGet]
-        public GuidResponse Get()
+        public ActionResult<GuidResponse> Get()
         {
+            if (_fail)
+            {
+                return StatusCode(500);
+            }
+
             return new GuidResponse
             {
                 guid = Guid.NewGuid(),
                 hostname = _machineName
             };
+        }
+
+        [HttpPost]
+        [Route("toggleFailure")]
+        public ActionResult ToggleFailure()
+        {
+            _fail = !_fail;
+            return Ok();
         }
 
     }
