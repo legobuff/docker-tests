@@ -43,6 +43,5 @@ namespace GuidMaker.Controllers
             _fail = !_fail;
             return Ok();
         }
-
     }
 }
