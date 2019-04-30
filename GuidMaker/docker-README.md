@@ -1,12 +1,8 @@
 # Running the image
 
-This image expects to run with https, thereby you will need to map a local port to 443, as well as configure ports and certificates by setting these environment variables:
+This image expects to run with https, thereby you will need to map a local port to 443, as well as configure ports and certificates as indicated in [Hosting ASP.NET Core Images with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https.md).
 
-- ASPNETCORE_URLS
-- ASPNETCORE_Kestrel__Certificates__Default__Password
-- ASPNETCORE_Kestrel__Certificates__Default__Path
-
-As an example:
+An example:
 
 ```
 docker run -it -p 4443:443 \
