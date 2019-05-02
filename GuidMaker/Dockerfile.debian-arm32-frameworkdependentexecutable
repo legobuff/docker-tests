@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+WORKDIR /app
+
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY *.csproj .
+RUN dotnet restore
+
+# copy everything else and build app
+COPY . .
+#RUN dotnet add package ILLink.Tasks -v 0.1.5-preview-1841731 -s https://dotnet.myget.org/F/dotnet-core/api/v3/index.json
+RUN dotnet publish -c Release -r linux-arm -o out --self-contained false
+
+FROM mcr.microsoft.com/dotnet/core/runtime-deps:2.2-stretch-slim-arm32v7 AS runtime
+WORKDIR /app
+COPY --from=build /app/out ./
+ENTRYPOINT ["./GuidMaker"]
