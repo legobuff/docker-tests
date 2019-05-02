@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <LinkerRootAssemblies Include="Microsoft.AspNetCore.Mvc.Razor.Extensions;Microsoft.Extensions.FileProviders.Composite;Microsoft.Extensions.Primitives;Microsoft.AspNetCore.Diagnostics.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\ValuesController.cs" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
 </Project>
